@@ -1,10 +1,15 @@
+import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { PedidoPage } from '../pages/pedido/pedido';
+import { LogoutPage } from '../pages/logout/logout';
+//import { AssinarPage } from '../pages/assinar/assinar';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,17 +17,25 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  //rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+    public platform: Platform, 
+    public statusBar: StatusBar, 
+    public splashScreen: SplashScreen,
+    public menuCtrl: MenuController
+  ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'List', component: ListPage },
+      { title: 'Pedido', component: PedidoPage },
+      { title: 'Sair', component: LogoutPage }
     ];
 
   }
@@ -33,6 +46,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      //this.menuCtrl.enable(false);
     });
   }
 
